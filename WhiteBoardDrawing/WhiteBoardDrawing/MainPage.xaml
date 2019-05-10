@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WhiteBoardDrawing"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:tt="clr-namespace:TouchTracking.Forms;assembly=TouchTracking.Forms"
+             x:Class="WhiteBoardDrawing.MainPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0" BackgroundColor="Gray" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" x:Name="RedButton" BackgroundColor="Red" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="1" x:Name="BlueButton" BackgroundColor="RoyalBlue" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="2" x:Name="OrangeButton" BackgroundColor="DarkOrange" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="3" x:Name="GreenButton" BackgroundColor="Green" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="4" x:Name="PinkButton" BackgroundColor="HotPink" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="5" x:Name="PurpleButton" BackgroundColor="Purple" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="6" x:Name="BlackButton" BackgroundColor="Black" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="7" x:Name="ClearButton" Text="Clear" Pressed="ClearButton_Pressed"/>
+        </Grid>
+
+        <Grid Grid.Column="1" BackgroundColor="White">
+            <skia:SKCanvasView x:Name="canvasView"
+                           PaintSurface="OnCanvasViewPaintSurface" />
+            <Grid.Effects>
+                <tt:TouchEffect Capture="True"
+                            TouchAction="OnTouchEffectAction" />
+            </Grid.Effects>
+        </Grid>
+
+
+    </Grid>
+
+
+</ContentPage>
