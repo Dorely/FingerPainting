@@ -7,7 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteBoardDrawing.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteBoardDrawing.iOS", "WhiteBoardDrawing\WhiteBoardDrawing.iOS\WhiteBoardDrawing.iOS.csproj", "{5759FFC1-6EFD-49FC-BC72-5E5086ACE101}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhiteBoardDrawing", "WhiteBoardDrawing\WhiteBoardDrawing\WhiteBoardDrawing.csproj", "{6ED8DF38-22AB-4E5C-91D4-CCF17F4A3FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhiteBoardDrawing", "WhiteBoardDrawing\WhiteBoardDrawing\WhiteBoardDrawing.csproj", "{6ED8DF38-22AB-4E5C-91D4-CCF17F4A3FA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7A5176B-7327-4A92-8286-6263D2E409FF}"
+	ProjectSection(SolutionItems) = preProject
+		PrivacyPolicy.txt = PrivacyPolicy.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
