@@ -9,7 +9,7 @@ using Android.OS;
 
 namespace WhiteBoardDrawing.Droid
 {
-    [Activity(Label = "WhiteBoardDrawing", Icon = "@drawable/FamilyPicture", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Baby Proof Painting", Icon = "@drawable/FamilyPicture", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
