@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using SkiaSharp;
 using TouchTracking;
 using SkiaSharp.Views.Forms;
+using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace WhiteBoardDrawing
 {
@@ -20,7 +22,7 @@ namespace WhiteBoardDrawing
     [DesignTimeVisible(true)]
     public partial class MainPage : ContentPage
     {
-        Dictionary<long, SKPath> inProgressPaths = new Dictionary<long, SKPath>();
+        ConcurrentDictionary<long, SKPath> inProgressPaths = new ConcurrentDictionary<long, SKPath>();
         List<PaintPath> completedPaths = new List<PaintPath>();
 
         SKPaint paint = new SKPaint
@@ -40,43 +42,59 @@ namespace WhiteBoardDrawing
 
         void OnTouchEffectAction(object sender, TouchActionEventArgs args)
         {
-            switch (args.Type)
+            try
             {
-                case TouchActionType.Pressed:
-                    if (!inProgressPaths.ContainsKey(args.Id))
-                    {
-                        SKPath path = new SKPath();
-                        path.MoveTo(ConvertToPixel(args.Location));
-                        inProgressPaths.Add(args.Id, path);
-                        canvasView.InvalidateSurface();
-                    }
-                    break;
 
-                case TouchActionType.Moved:
-                    if (inProgressPaths.ContainsKey(args.Id))
-                    {
-                        SKPath path = inProgressPaths[args.Id];
-                        path.LineTo(ConvertToPixel(args.Location));
-                        canvasView.InvalidateSurface();
-                    }
-                    break;
+                switch (args.Type)
+                {
+                    case TouchActionType.Pressed:
+                        Debug.WriteLine(args.Id);
+                        if (!inProgressPaths.ContainsKey(args.Id))
+                        {
+                            SKPath path = new SKPath();
+                            path.MoveTo(ConvertToPixel(args.Location));
+                            try
+                            {
+                                inProgressPaths.TryAdd(args.Id, path);
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.WriteLine(e);
+                            }
+                            canvasView.InvalidateSurface();
+                        }
+                        break;
 
-                case TouchActionType.Released:
-                    if (inProgressPaths.ContainsKey(args.Id))
-                    {
-                        completedPaths.Add(new PaintPath() { Path = inProgressPaths[args.Id], Paint = paint.Clone() });
-                        inProgressPaths.Remove(args.Id);
-                        canvasView.InvalidateSurface();
-                    }
-                    break;
+                    case TouchActionType.Moved:
+                        if (inProgressPaths.ContainsKey(args.Id))
+                        {
+                            SKPath path = inProgressPaths[args.Id];
+                            path.LineTo(ConvertToPixel(args.Location));
+                            canvasView.InvalidateSurface();
+                        }
+                        break;
 
-                case TouchActionType.Cancelled:
-                    if (inProgressPaths.ContainsKey(args.Id))
-                    {
-                        inProgressPaths.Remove(args.Id);
-                        canvasView.InvalidateSurface();
-                    }
-                    break;
+                    case TouchActionType.Released:
+                        if (inProgressPaths.ContainsKey(args.Id))
+                        {
+                            completedPaths.Add(new PaintPath() { Path = inProgressPaths[args.Id], Paint = paint.Clone() });
+                            inProgressPaths.TryRemove(args.Id, out _);
+                            canvasView.InvalidateSurface();
+                        }
+                        break;
+
+                    case TouchActionType.Cancelled:
+                        if (inProgressPaths.ContainsKey(args.Id))
+                        {
+                            inProgressPaths.TryRemove(args.Id, out _);
+                            canvasView.InvalidateSurface();
+                        }
+                        break;
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine(e);
             }
         }
 
@@ -105,7 +123,7 @@ namespace WhiteBoardDrawing
         private void ClearButton_Pressed(object sender, EventArgs e)
         {
             completedPaths = new List<PaintPath>();
-            inProgressPaths = new Dictionary<long, SKPath>();
+            inProgressPaths = new ConcurrentDictionary<long, SKPath>();
             canvasView.InvalidateSurface();
         }
 
@@ -154,6 +172,16 @@ namespace WhiteBoardDrawing
             if (sender == BlackButton)
             {
                 newPaint.Color = SKColors.Black;
+                paint = newPaint;
+            }
+            if (sender == BrownButton)
+            {
+                newPaint.Color = SKColors.SaddleBrown;
+                paint = newPaint;
+            }
+            if (sender == YellowButton)
+            {
+                newPaint.Color = SKColors.Yellow;
                 paint = newPaint;
             }
 

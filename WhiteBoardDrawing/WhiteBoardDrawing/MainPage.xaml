@@ -22,6 +22,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
             <Button Grid.Row="0" x:Name="RedButton" BackgroundColor="Red" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
@@ -30,8 +32,10 @@
             <Button Grid.Row="3" x:Name="GreenButton" BackgroundColor="Green" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
             <Button Grid.Row="4" x:Name="PinkButton" BackgroundColor="HotPink" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
             <Button Grid.Row="5" x:Name="PurpleButton" BackgroundColor="Purple" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
-            <Button Grid.Row="6" x:Name="BlackButton" BackgroundColor="Black" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
-            <Button Grid.Row="7" x:Name="ClearButton" Text="Clear" Pressed="ClearButton_Pressed"/>
+            <Button Grid.Row="6" x:Name="BrownButton" BackgroundColor="SaddleBrown" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="7" x:Name="YellowButton" BackgroundColor="Yellow" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="8" x:Name="BlackButton" BackgroundColor="Black" BorderWidth="1" BorderColor="Black" Margin="0" Padding="0" Pressed="ColorButton_Pressed"/>
+            <Button Grid.Row="9" x:Name="ClearButton" Text="Clear" Pressed="ClearButton_Pressed"/>
         </Grid>
 
         <Grid Grid.Column="1" BackgroundColor="White">
